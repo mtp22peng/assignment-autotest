@@ -19,7 +19,10 @@ if [ $rc -ne 1 ]; then
 	add_validate_error "writer.sh should have exited with return value 1 if write string is not specified"
 fi
 
-./finder-test.sh
+# generate directory name from random string
+dir_name=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w32 | head -n 1)
+./finder-test.sh 10 AELD_IS_FUN $dir_name
+
 rc=$?
 if [ $rc -ne 0 ]; then
 	add_validate_error "finder-test.sh execution failed with return code $rc"
